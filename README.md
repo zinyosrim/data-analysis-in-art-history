@@ -15,7 +15,7 @@ Go to VPC Network, External IP Adresses. Click Reserve Static Address
 Enter Name, select your Region and VM (Attached to)
 
 Go to VPC Network, Firewall rules. Click CREATE FIREWALL RULE
-Enter Name, Source IP ranges (0.0.0.0/0), Protocols and ports (tcp:6006, tcp:8888)
+Enter Name, Source IP ranges (0.0.0.0/0), Protocols and ports (tcp:80-8888)
 
 Click Create
 ## Prepare VM
@@ -27,36 +27,21 @@ sudo apt-get update
 sudo apt-get install -y docker.io
 sudo docker version
 sudo docker info
-sudo service docker status
 ```
-### Get a ready Machine Learning image 
-Use from Github the *All-in-one Docker image for Deep Learning* https://github.com/floydhub/dl-docker
-It contains:
-* Ubuntu 14.04
-* CUDA 8.0 (GPU version only)
-* cuDNN v5 (GPU version only)
-* Tensorflow
-* Caffe
-* Theano
-* Keras
-* Lasagne
-* Torch (includes nn, cutorch, cunn and cuDNN bindings)
-* iPython/Jupyter Notebook (including iTorch kernel)
-* Numpy, SciPy, Pandas, Scikit Learn, Matplotlib
-* OpenCV
-* A few common libraries used for deep learning
-Install on your VM
+### Get the Anaconda Image 
+Install and run on your VM
 ```
-sudo docker pull floydhub/dl-docker:cpu
+sudo docker run -p 8888:8888 -it  continuumio/anaconda3:v2_gcp
 ```
-Run
+Start Jupyter Server
 ```
-sudo docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfold
-er floydhub/dl-docker:cpu bash
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+``` 
+You will get a message like:
 ```
-Start Jupyter server
+The Jupyter Notebook is running at: http://0.0.0.0:8888/?token=546277c6b8858664455c24101f0ceec9e53e87374359c61f
 ```
-run_jupyter.sh
-```
+
 ### Accessing Jupyter
-In your browser connect to the static IP of the VM xx.xxx.xx.xx:8888
+Copy the piece :8888/?token..... and append to your static IP.
+In your browser connect to the static IP of the VM xx.xxx.xx.xx:8888/?token=546277c6b8858664455c24101f0ceec9e53e87374359c61f
