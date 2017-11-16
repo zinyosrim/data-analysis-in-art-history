@@ -1,5 +1,5 @@
 # Set-up the environment on the Google Cloud Platform (GCP)
-Running Jupyter for Machine Learning on Google Cloud Platform 
+Running Anaconda3/Jupyter for Machine Learning on Google Cloud Platform 
 ## Configuration in GCP Console
 ### Create VM Instance
 Fill in
@@ -31,7 +31,17 @@ sudo docker info
 ### Get the Anaconda Image 
 Install and run on your VM
 ```
-sudo docker run -p 8888:8888 -it  continuumio/anaconda3:v2_gcp
+sudo docker run -p 8888:8888 -it  continuumio/anaconda3
+```
+### Install GCP Library
+Anaconda comes without google-cloud
+```
+pip install google-cloud
+```
+At this point you might want to save the configuration to a new docker image
+```
+sudo docker ps # this will output the container id, e.g. 4fb722df054c
+sudo docker commit 4fb722df054c continuumio/anaconda3:v2_gcp
 ```
 Start Jupyter Server
 ```
@@ -43,5 +53,5 @@ The Jupyter Notebook is running at: http://0.0.0.0:8888/?token=546277c6b88586644
 ```
 
 ### Accessing Jupyter
-Copy the piece :8888/?token..... and append to your static IP.
+Copy the piece after http://0.0.0.0 *:8888/?token.....* and append to your static IP.
 In your browser connect to the static IP of the VM xx.xxx.xx.xx:8888/?token=546277c6b8858664455c24101f0ceec9e53e87374359c61f
