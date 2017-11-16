@@ -53,5 +53,5 @@ The Jupyter Notebook is running at: http://0.0.0.0:8888/?token=546277c6b88586644
 ```
 
 ### Accessing Jupyter
-Copy the piece after http://0.0.0.0 *:8888/?token.....* and append to your static IP.
+Copy the piece after http://0.0.0.0 *:8888/?token=54.....* and append to your static IP.
 In your browser connect to the static IP of the VM xx.xxx.xx.xx:8888/?token=546277c6b8858664455c24101f0ceec9e53e87374359c61f
